@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>津田沼自習スポット</title>
+    <style>
+        body { font-family: "Meiryo", sans-serif; padding: 20px; background-color: #f4f4f4; }
+        h1 { color: #333; }
+        
+        .container { display: flex; gap: 30px; }
+        .list-area { flex: 2; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .detail-area { flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); height: fit-content; }
+        
+        /* テーブルのスタイル */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border-bottom: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #eee; }
+        tr:hover { background-color: #f9f9f9; cursor: pointer; }
+        
+        /* フォーム要素 */
+        input, select { width: 100%; padding: 8px; margin: 5px 0 15px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
+        label { font-weight: bold; font-size: 0.9em; }
+        
+        /* ボタン */
+        button { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .btn-delete { background-color: #f44336; margin-left: 10px;}
+        .btn-delete:hover { background-color: #d32f2f; }
+        .btn-new { background-color: #2196F3; margin-bottom: 10px;}
+        
+        /* 検索バー */
+        .search-box { margin-bottom: 15px; display: flex; gap: 10px; }
+        .search-box input { width: auto; flex-grow: 1; margin: 0; }
+    </style>
+</head>
+<body>
+    <h1>📚 津田沼自習スポット</h1>
+    
+    <div class="container">
+        <div class="list-area">
+            <div class="search-box">
+                <input type="text" id="search-keyword" placeholder="場所...">
+                <button onclick="searchBooks()">検索</button>
+            </div>
+            <button class="btn-new" onclick="showCreateForm()">＋ 新規登録</button>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>テナント名</th>
+                        <th>津田沼からの距離</th>
+                        <th>状態</th>
+                    </tr>
+                </thead>
+                <tbody id="book-list-body">
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="detail-area" id="detail-area">
+            <h3>インフォメーション</h3>
+            <p>左のリストから本を選択するか、<br>「新規登録」ボタンを押してください。</p>
+        </div>
+    </div>
+
+    <script src="/public/app.js"></script>
+</body>
+</html>
