@@ -1,7 +1,7 @@
 {
-  "name": "webs",
+  "name": "campus-system-update",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -9,8 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "ejs": "^4.0.1",
     "express": "^5.2.1"
-  }
+  },
+  "description": ""
 }

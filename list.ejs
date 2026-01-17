@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta charset="UTF-8"><title>自習室管理</title></head>
+<body>
+    <h1>📚 自習スポット一覧</h1>
+    <table border="1">
+        <tr><th>名称</th><th>場所</th><th>状態</th></tr>
+        <% items.forEach(function(item) { %>
+            <tr><td><%= item.name %></td><td><%= item.location %></td><td><%= item.status %></td></tr>
+        <% }); %>
+    </table>
+    <h2>新規登録</h2>
+    <form method="POST" action="/zisyuu/add">
+        名称: <input type="text" name="name" placeholder="例: 図書館3F" required><br>
+        場所: <input type="text" name="location" placeholder="例: 5号館" required><br>
+        状態: <input type="text" name="status" placeholder="例: 空き / 混雑" required><br>
+        <button type="submit">保存する</button>
+    </form>
+</body>
+</html>
