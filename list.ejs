@@ -1,20 +1,57 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head><meta charset="UTF-8"><title>自習室管理</title></head>
+<head><meta charset="UTF-8"><title>自習スポット管理</title></head>
 <body>
-    <h1>📚 自習スポット一覧</h1>
-    <table border="1">
-        <tr><th>名称</th><th>場所</th><th>状態</th></tr>
+    <h1>📚 津田沼自習スポット一覧</h1>
+
+    <% if (mode === 'detail' && target) { %>
+        <div style="background: #f0f0f0; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
+            <h2>🔍 詳細情報</h2>
+            <p>ID: <%= target.id %></p>
+            <p>名称: <%= target.name %></p>
+            <p>場所: <%= target.location %></p>
+            <p>状態: <%= target.status %></p>
+            <a href="/zisyuu">詳細を閉じる</a>
+        </div>
+    <% } %>
+
+    <% if (mode === 'edit' && target) { %>
+        <div style="background: #fffbe6; padding: 15px; border: 1px solid #ffe58f; margin-bottom: 20px;">
+            <h2>✏️ データの変更</h2>
+            <form method="POST" action="/zisyuu/update/<%= target.id %>">
+                名称: <input type="text" name="name" value="<%= target.name %>" required><br>
+                場所: <input type="text" name="location" value="<%= target.location %>" required><br>
+                状態: <input type="text" name="status" value="<%= target.status %>" required><br>
+                <button type="submit">更新保存</button> <a href="/zisyuu">キャンセル</a>
+            </form>
+        </div>
+    <% } %>
+
+    <table border="1" cellpadding="5" style="border-collapse: collapse; width: 80%;">
+        <tr style="background: #eee;"><th>名称 (詳細)</th><th>場所</th><th>状態</th><th>操作</th></tr>
         <% items.forEach(function(item) { %>
-            <tr><td><%= item.name %></td><td><%= item.location %></td><td><%= item.status %></td></tr>
+            <tr>
+                <td><a href="/zisyuu/detail/<%= item.id %>"><%= item.name %></a></td>
+                <td><%= item.location %></td>
+                <td><%= item.status %></td>
+                <td>
+                    <a href="/zisyuu/edit/<%= item.id %>">編集</a> | 
+                    <form action="/zisyuu/delete/<%= item.id %>" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
+                    </form>
+                </td>
+            </tr>
         <% }); %>
     </table>
-    <h2>新規登録</h2>
-    <form method="POST" action="/zisyuu/add">
-        名称: <input type="text" name="name" placeholder="例: 図書館3F" required><br>
-        場所: <input type="text" name="location" placeholder="例: 5号館" required><br>
-        状態: <input type="text" name="status" placeholder="例: 空き / 混雑" required><br>
-        <button type="submit">保存する</button>
-    </form>
+
+    <% if (mode !== 'edit') { %>
+        <h2>🆕 新規スポット登録</h2>
+        <form method="POST" action="/zisyuu/add">
+            名称: <input type="text" name="name" placeholder="例: 図書館5F" required><br>
+            場所: <input type="text" name="location" placeholder="例: 5号館" required><br>
+            状態: <input type="text" name="status" placeholder="例: 空き" required><br>
+            <button type="submit">登録する</button>
+        </form>
+    <% } %>
 </body>
 </html>
